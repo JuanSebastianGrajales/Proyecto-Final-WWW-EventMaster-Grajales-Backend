@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\CategoriesController;
+use App\Http\Controllers\Api\EventsController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use Illuminate\Http\Request;
@@ -21,3 +23,12 @@ Route::post('/register', [RegisteredUserController::class, 'store'])
 Route::post('/login', [AuthenticatedSessionController::class, 'store'])
     ->middleware('guest')
     ->name('login');
+
+
+Route::controller(EventsController::class)->group(function() {
+    Route::get('/events', 'index');
+    Route::post('/events', 'store');
+    Route::put('/events', 'updatePartial');
+});
+
+Route::get('/categories', [CategoriesController::class, 'index']);
