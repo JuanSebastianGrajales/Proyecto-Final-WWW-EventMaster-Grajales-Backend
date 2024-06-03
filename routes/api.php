@@ -24,11 +24,10 @@ Route::post('/login', [AuthenticatedSessionController::class, 'store'])
     ->middleware('guest')
     ->name('login');
 
-
 Route::controller(EventsController::class)->group(function() {
-    Route::get('/events', 'index');
+    Route::get('/events', 'index')->name('events');
     Route::post('/events', 'store');
-    Route::put('/events', 'updatePartial');
+    Route::patch('/events/{id}', 'updatePartial');
 });
 
 Route::get('/categories', [CategoriesController::class, 'index']);
