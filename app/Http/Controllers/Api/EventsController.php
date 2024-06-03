@@ -11,7 +11,7 @@ class EventsController extends Controller
 {
     public function index()
     {
-        $events = Events::all();
+        $events = Events::with(['category', 'user'])->get();
 
         return response()->json($events);
     }

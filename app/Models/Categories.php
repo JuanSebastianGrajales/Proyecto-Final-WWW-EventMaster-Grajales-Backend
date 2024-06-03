@@ -16,4 +16,9 @@ class Categories extends Model
         'name',
         'description'
     ];
+
+    public function events()
+    {
+        return $this->hasMany(Events::class, 'category_id');
+    }
 }
