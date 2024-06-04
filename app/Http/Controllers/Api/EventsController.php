@@ -136,4 +136,11 @@ class EventsController extends Controller
 
         return response()->json($data, 200);
     }
+
+    public function createdBy($user_id)
+    {
+        $events = Events::where('user_id', $user_id)->get();
+
+        return response()->json($events);
+    }
 }
