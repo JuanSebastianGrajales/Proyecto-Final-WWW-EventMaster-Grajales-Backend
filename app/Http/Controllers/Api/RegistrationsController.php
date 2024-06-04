@@ -81,4 +81,24 @@ class RegistrationsController extends Controller
 
         return response()->json($data, 200);
     }
+
+    public function registrationsUser($user_id)
+    {
+
+        // Obtener todas las registraciones para el usuario dado
+        $registrations = Registrations::where('user_id', $user_id)->get();
+
+        // Verificar si se encontraron registraciones
+        if ($registrations->isEmpty()) {
+            return response()->json(['message' => 'No se encontraron registros para el usuario dado.'], 404);
+        }
+
+        // Obtener los eventos asociados a las registraciones del usuario
+        $events = $registrations->map(function ($registration) {
+            return $registration->event;
+        });
+
+        // Retornar los eventos como respuesta JSON
+        return response()->json($registrations);
+    }
 }

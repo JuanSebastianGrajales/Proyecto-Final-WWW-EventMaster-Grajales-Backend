@@ -37,4 +37,5 @@ Route::controller(RegistrationsController::class)->group(function() {
     Route::get('/registrations', 'index');
     Route::post('/registrations', 'store');
     Route::delete('/registrations/{user_id}/{event_id}', 'destroy');
+    Route::get('/registrations-history/{user_id}', 'registrationsUser');
 });

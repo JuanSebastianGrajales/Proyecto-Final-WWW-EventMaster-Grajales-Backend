@@ -16,4 +16,9 @@ class Registrations extends Model
         'event_id',
         'registered_at'
     ];
+
+    public function event()
+    {
+        return $this->belongsTo(Events::class, 'event_id');
+    }
 }
