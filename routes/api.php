@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\CategoriesController;
 use App\Http\Controllers\Api\EventsController;
+use App\Http\Controllers\Api\RegistrationsController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use Illuminate\Http\Request;
@@ -31,3 +32,9 @@ Route::controller(EventsController::class)->group(function() {
 });
 
 Route::get('/categories', [CategoriesController::class, 'index']);
+
+Route::controller(RegistrationsController::class)->group(function() {
+    Route::get('/registrations', 'index');
+    Route::post('/registrations', 'store');
+    Route::delete('/registrations/{user_id}/{event_id}', 'destroy');
+});
