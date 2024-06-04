@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\CategoriesController;
 use App\Http\Controllers\Api\EventsController;
 use App\Http\Controllers\Api\RegistrationsController;
@@ -40,3 +41,14 @@ Route::controller(RegistrationsController::class)->group(function() {
     Route::delete('/registrations/{user_id}/{event_id}', 'destroy');
     Route::get('/registrations-history/{user_id}', 'registrationsUser');
 });
+
+Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
+    return $request->user();
+});
+
+    Route::controller(UserController::class)->group(function() {
+        Route::get('/users', 'index');
+        Route::post('/users', 'store');
+        Route::get('/users/{id}', 'show');
+        Route::put('/users/{id}', 'updateProfile'); // Changed to 'put'
+    });
